@@ -1,18 +1,27 @@
-# Autonomous Vision Vehicle (Raspberry Pi & Arduino)
+Autonomous Vision Vehicle (Raspberry Pi & Arduino)
 
-An integrated dual-board system for real-time lane tracking and dynamic velocity control.
+A dual-board self-driving car that tracks lanes in real-time and automatically adjusts its speed.
 
-## 🚀 System Architecture
-- **Host (Raspberry Pi 4)**: Captures video feeds via camera module, applies OpenCV image segmentation (ROI + Thresholding), computes steering error using a tuned PID controller, and sends motor speeds over Serial UART.
-- **Microcontroller (Arduino)**: Parses serial packets, drives DC motors via PWM (L298N), monitors ultrasonic distance sensor, and executes hardware-level emergency braking.
+System Architecture
 
-## 🛠️ Key Technical Features
-- **OpenCV Lane Detection**: Uses binary inverse thresholding and image moments to determine lane centerline.
-- **PID Steering Logic**: Closed-loop $P, I, D$ control algorithm to eliminate oscillation during cornering.
-- **Safety Watchdog & Filtering**: Built-in 500ms timeout watchdog for serial connection loss, coupled with ultrasonic sensor distance protection.
+Raspberry Pi 4: Handles camera input, uses OpenCV (ROI + thresholding) for lane detection, runs a PID controller to calculate steering error, and sends motor controls to the Arduino via Serial UART.
 
-## 📋 Software Prerequisites
-- Python 3.x
-- OpenCV (`pip install opencv-python`)
-- PySerial (`pip install pyserial`)
-- NumPy (`pip install numpy`)
+Arduino: Receives serial commands, drives the DC motors using an L298N driver, checks distance with an ultrasonic sensor, and handles hard braking if an obstacle is too close.
+
+Key Features
+
+OpenCV lane detection using binary inverse thresholding and image moments.
+
+PID-based steering control to keep cornering smooth.
+
+Built-in safety features: auto-stops if serial connection drops for over 500ms, plus ultrasonic obstacle detection.
+
+Requirements
+
+Python 3
+
+OpenCV (pip install opencv-python)
+
+PySerial (pip install pyserial)
+
+NumPy (pip install numpy)
